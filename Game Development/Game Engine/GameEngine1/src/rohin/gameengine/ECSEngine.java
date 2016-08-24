@@ -245,9 +245,6 @@ public abstract class ECSEngine extends ECSObject
     // 
     // Used to implement a fixed period frame rate delay.
     // 
-    // Arguments:
-    // - period
-    //   The period to delay in milliseconds.
     // --------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public String printGameObjects ()
