@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<StringTable language="Klingon" languageNativeName="tlhIngan" >
+<StringTable language="Snoop" languageNativeName="Snoop Dogg" >
 
     <String id="IDS_EMPTY_STRING"                value=""                                              hotkey=""  />
     <String id="IDS_TEST_HELLO_WORLD"            value="Wuz crackalackin' Ghetto hommie"               hotkey=""  />        
