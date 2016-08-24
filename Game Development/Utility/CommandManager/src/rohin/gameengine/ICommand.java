@@ -1,0 +1,18 @@
+package rohin.gameengine;
+
+// /////////////////////////////////////////////////////////////////////////////
+// 
+// ICommand:
+// 
+// ICommand delegate, to be implemented by concrete commands.
+// 
+// Author:  Rohin Gosling
+// Version: 1.0
+// Since:   2014-04-18
+// 
+///////////////////////////////////////////////////////////////////////////////
+
+public interface ICommand
+{   
+    public void execute ();
+}

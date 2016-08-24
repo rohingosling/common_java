@@ -1,0 +1,6 @@
+package rohin.gameengine;
+
+public class ComponentTranslation extends ECSComponent
+{
+    double[] p = { 0.0, 0.0, 0.0 };     // Translation vector (position). p = {x,y,z}.    
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;rohin.gameengine.GMath.multiplyVector(...)&apos; to &apos;hadamardProduct&apos;&#x0D;&#x0A;- Original project: &apos;UtilityClassLibrary&apos;&#x0D;&#x0A;- Original element: &apos;rohin.gameengine.GMath.multiplyVector(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;rohin.gameengine.GMath.hadamardProduct(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;multiplyVector&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;rohin.gameengine{GMath.java[GMath~multiplyVector~\[D~\[D" name="hadamardProduct" references="true" stamp="1431260585660" version="1.0"/>
+</session>

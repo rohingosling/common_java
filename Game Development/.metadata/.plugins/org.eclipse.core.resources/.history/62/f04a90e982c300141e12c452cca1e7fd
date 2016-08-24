@@ -1,0 +1,67 @@
+package rohin.gameengine;
+
+public class ECSSystemExampleEntityItterator extends ECSSystem
+{       
+    // Fields.
+        
+    Boolean       loggingEnabled;
+    ConsoleLogger logger;
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Constructor/s
+    // --------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public ECSSystemExampleEntityItterator( ECSEngine owner )
+    {
+        // Initialize ECS object parameters.
+        
+        this.id    = Constants.SYSTEM_EXAMPLE;
+        this.name  = "SYSTEM_EXAMPLE";
+        this.text  = "Example System";
+        this.owner = owner;
+        
+        // Initialize system management parameters.
+        
+        this.loggingEnabled = true;
+        this.logger         = new ConsoleLogger ( this, this.loggingEnabled );
+    }
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Override implementation of ECSSystem.Update. 
+    // --------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void Update ( long t, ECSEngine engine )
+    {   
+        // Constants.
+        
+        // Note:
+        // Component index constants, must be specified in the order in which they will be passed to ECSEntity.GetComponents as arguments.
+        
+        final int INDEX_TRANSLATION = 0;    // Component array index.
+        final int INDEX_ROTATION    = 1;    // Component array index.
+        
+        // Components.
+        
+        ECSComponentTranslation translation = new ECSComponentTranslation ();
+        ECSComponentRotation    rotation    = new ECSComponentRotation ();
+        ECSComponent[]          components  = null;
+        
+        // Iterate through all entities, filtering by those that contain the specific set of components, that this system requires to work with.
+        
+        for ( ECSEntity entity : engine.GetEntities () )
+        {   
+            components = entity.GetComponents ( translation, rotation  );
+            
+            if ( components != null )
+            {
+                translation = ( ECSComponentTranslation ) components [ INDEX_TRANSLATION ];
+                rotation    = ( ECSComponentRotation )    components [ INDEX_ROTATION    ];
+                
+                // Start working with the entities components.
+                
+                logger.Log ();
+            }
+        }        
+    }
+}
+

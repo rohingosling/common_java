@@ -1,0 +1,10 @@
+<NotepadPlus>
+    <Project name="Reference">
+        <Folder name="GameEngine0" />
+        <Folder name="GameEngine1" />
+        <Folder name="GameEngine2" />
+        <Folder name="Demo" />
+        <Folder name="Implementation" />
+    </Project>
+    <Project name="Game Engine" />
+</NotepadPlus>

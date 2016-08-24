@@ -1,0 +1,7 @@
+1424027820095	Rename method 'PrintApplicationSettings'
+1424030124507	Rename local variable 'S_LOG_APPLICATION_SETTINGS_LOADED'
+1424030238722	Rename local variable 'S_APPLICATION_SETTINGS_LOADED'
+1424202576461	Rename type 'Vector'
+1424202736059	Move compilation units
+1424383568881	Rename method 'GetApplicationSettings'
+1424550803177	Rename type 'EventListener'

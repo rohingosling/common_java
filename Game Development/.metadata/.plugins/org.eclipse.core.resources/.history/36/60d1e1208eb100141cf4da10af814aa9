@@ -1,0 +1,142 @@
+
+package rohin.gamengine;
+
+// //////////////////////////////////////////////////////////////////////////////
+/**
+ * Main application program.
+ * 
+ * @author Rohin Gosling
+ * @version 1.0
+ * @since 2014-04-18
+ */
+// //////////////////////////////////////////////////////////////////////////////
+
+public class Application
+{
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // DATA TYPES
+    //
+    // //////////////////////////////////////////////////////////////////////////
+
+    enum ApplicationState
+    {
+        IDLE,
+        START_UP,
+        SHUT_DOWN,
+        EXIT,
+        MENU_MAIN,
+        MENU_SETTINGS,
+        MENU_GAME_SETUP,
+        GAME_LOOP,
+        GAME_LOOP_TEST
+    }
+
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // CONSTANTS
+    //
+    // //////////////////////////////////////////////////////////////////////////
+
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // FIELDS
+    //
+    // //////////////////////////////////////////////////////////////////////////
+
+    private ApplicationState applicationState;
+    private ConsoleLogger    logger;
+    private Boolean          loggingEnabled;
+
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // ACCESSORS and MUTATORS
+    //
+    // //////////////////////////////////////////////////////////////////////////
+
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // METHODS
+    //
+    // //////////////////////////////////////////////////////////////////////////
+
+    // -------------------------------------------------------------------------
+    /**
+     * Constructor 1
+     */
+    // -------------------------------------------------------------------------
+
+    public Application ()
+    {
+        this.applicationState = ApplicationState.IDLE;
+        this.logger           = new ConsoleLogger ();
+        this.loggingEnabled   = true;
+    }
+
+    // -------------------------------------------------------------------------
+    /**
+     * Call Run() to start the application.
+     */
+    // -------------------------------------------------------------------------
+
+    @ SuppressWarnings ( "incomplete-switch" )
+    public void Run ()
+    {
+        // Console logger.
+
+        logger.Log ( loggingEnabled, "Application.Run()" );
+
+        // Begin application state management loop.
+
+        this.applicationState = ApplicationState.START_UP;
+
+        while ( this.applicationState != ApplicationState.EXIT )
+        {
+            switch ( this.applicationState )
+            {
+            case START_UP:
+                logger.Log ( loggingEnabled, "Application.Run() - State = START_UP" );
+                this.applicationState = ApplicationState.MENU_MAIN;
+                break;
+
+            case SHUT_DOWN:
+                logger.Log ( loggingEnabled, "Application.Run() - State = SHUT_DOWN" );
+                this.applicationState = ApplicationState.EXIT;
+                break;
+
+            case MENU_MAIN:
+                logger.Log ( loggingEnabled, "Application.Run() - State = MENU_MAIN" );
+                this.applicationState = ApplicationState.GAME_LOOP;
+                break;
+
+            case MENU_SETTINGS:
+                logger.Log ( loggingEnabled, "Application.Run() - State = MENU_SETTINGS" );
+                break;
+
+            case MENU_GAME_SETUP:
+                logger.Log ( loggingEnabled, "Application.Run() - State = MENU_GAME_SETUP" );
+                break;
+
+            case GAME_LOOP:
+                logger.Log ( loggingEnabled, "Application.Run() - State = GAME_LOOP" );
+                this.applicationState = ApplicationState.SHUT_DOWN;
+                break;
+
+            case GAME_LOOP_TEST:
+                logger.Log ( loggingEnabled, "Application.Run() - State = GAME_LOOP_TEST" );
+                break;
+            }
+        }
+
+        // Console logger.
+
+        logger.Log ( loggingEnabled, "Application.Run() - State = EXIT" );
+    }
+
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // OVERRIDEBLE METHODS
+    //
+    // //////////////////////////////////////////////////////////////////////////
+
+}

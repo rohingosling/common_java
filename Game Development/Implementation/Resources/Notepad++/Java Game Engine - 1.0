@@ -1,0 +1,63 @@
+<NotepadPlus>
+    <Project name="Reference">
+        <Folder name="GameEngine1">
+            <Folder name="Source">
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\StringTable.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\Sprite.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\Main.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\LogMessageBuilder.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\LogFormatter.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\LogConsoleHandler.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\GUIComponent.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\GameMath.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\GameLoop.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\GameGraphicsWindow.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\GameEventHandlerKeyboard.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\GameEngineV1.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\GameEngineSettings.java" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\src\jcse\cpd\genericgameengine\GameEngine.java" />
+            </Folder>
+            <Folder name="Resrouces">
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\game_database_1.0.xml" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\game_engine.properties" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\string_table_english.xml" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\string_table_klingon.xml" />
+                <File name="R:\Projects\Academic\CPD\Java\GameEngine1\string_table_snoop.xml" />
+            </Folder>
+        </Folder>
+        <Folder name="GameEngine2">
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\Command.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\Event.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\EventManager.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\GameComponent.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\GameLoop.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\GameMath.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\IListener.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\LogConsoleHandler.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine2\src\jcse\cpd\genericgameengine\LogFormatter.java" />
+        </Folder>
+        <Folder name="Demo">
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine0\src\org\newdawn\spaceinvaders\AlienEntity.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine0\src\org\newdawn\spaceinvaders\Entity.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine0\src\org\newdawn\spaceinvaders\Game.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine0\src\org\newdawn\spaceinvaders\ShipEntity.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine0\src\org\newdawn\spaceinvaders\ShotEntity.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine0\src\org\newdawn\spaceinvaders\Sprite.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameEngine0\src\org\newdawn\spaceinvaders\SpriteStore.java" />
+        </Folder>
+        <Folder name="Exampless">
+            <File name="R:\Projects\Academic\CPD\Java\GameImplementation1\src\jcse\cpd\genericgameengine\TestCommandInterpreter.java" />
+            <File name="R:\Projects\Academic\CPD\Java\GameImplementation1\src\jcse\cpd\genericgameengine\TestEventHandler.java" />
+        </Folder>
+    </Project>
+    <Project name="Game Engine">
+        <Folder name="Framework">
+            <File name="R:\Projects\Game Development\Implementation\Java\GameImplementation1\game_engine_1.0.properties" />
+        </Folder>
+        <Folder name="Implementation" />
+        <Folder name="Code Templates">
+            <File name="R:\Projects\Game Development\Game Engine\Resources\Reference Code\Class Template 1.0.java" />
+            <File name="R:\Projects\Game Development\Game Engine\Resources\Reference Code\Logging.java" />
+        </Folder>
+    </Project>
+</NotepadPlus>

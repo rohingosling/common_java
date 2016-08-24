@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;testEngine&apos; in &apos;rohin.gameengine.test.Application.run()&apos; to &apos;engine&apos;&#x0D;&#x0A;- Original project: &apos;TestImplementation&apos;&#x0D;&#x0A;- Original element: &apos;rohin.gameengine.test.Application.run().testEngine&apos;&#x0D;&#x0A;- Renamed element: &apos;testEngine&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;testEngine&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;rohin.gameengine.test{Application.java[Application~run@testEngine!655!700!668!677!QCustomEngine;!0!false" name="engine" references="true" stamp="1423608313636" version="1.0"/>
+</session>

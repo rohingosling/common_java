@@ -1,0 +1,6 @@
+package rohin.gameengine;
+
+public class ComponentScale extends ECSComponent
+{
+    double[] s = { 1.0, 1.0, 1.0 };     // Scaling vector factor. s = { x, y, z }.
+}

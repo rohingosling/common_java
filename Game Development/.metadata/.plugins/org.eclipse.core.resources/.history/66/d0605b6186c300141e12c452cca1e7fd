@@ -1,0 +1,20 @@
+package rohin.gameengine;
+
+public class ECSEntityCommandQueue extends ECSEntity
+{
+    // Constructor/s
+    
+    public ECSEntityCommandQueue ( ECSEngine owner )
+    {   
+        // Initialize ECS object parameters.
+        
+        this.id    = Constants.ENTITY_COMMAND_QUEUE;    // Unique entity ID.
+        this.name  = "ENTITY_COMMAND_QUEUE";            // Internal name.
+        this.text  = "Command Queue";                   // Display name.
+        this.owner = owner;                             // PArent object. For in case we want to talk with the parent game engine.
+        
+        // Add components.
+        
+        this.AddComponent ( new ECSComponentCommandInvoker () );        
+    }
+}

@@ -1,0 +1,6 @@
+package rohin.gameengine;
+
+public class ECSComponentCommandInvoker extends ECSComponent
+{
+    CommandInvoker commandInvoker = new CommandInvoker ();
+}

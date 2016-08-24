@@ -1,0 +1,61 @@
+package rohin.gameengine;
+
+public class SystemRenderer extends ECSSystem
+{
+    // Fields.
+    
+    Boolean       loggingEnabled;
+    ConsoleLogger logger;
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Constructor/s
+    // --------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public SystemRenderer( ECSEngine owner )
+    {
+        // Initialize ECS object parameters.
+        
+        this.id    = Constants.SYSTEM_EXAMPLE;
+        this.name  = "SYSTEM_EXAMPLE";        
+        this.owner = owner;
+        
+        // Initialize system management parameters.
+        
+        this.loggingEnabled = false;
+        this.logger         = new ConsoleLogger ( this, this.loggingEnabled );
+    }
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Override implementation of ECSSystem.Update. 
+    // --------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    @Override
+    public void update ( long t )
+    {
+        ECSEngine              engine      = (ECSEngine) this.owner;
+        ComponentTranslation   translation = new ComponentTranslation ();
+        ComponentRotation      rotation    = new ComponentRotation ();
+        ComponentResourceSprite image       = new ComponentResourceSprite ();
+        
+        
+        // Iterate through all entities, filtering by those that contain the specific set of components, that this system requires to work with.
+        
+        for ( ECSEntity entity : engine.getEntities () )
+        {   
+            if ( entity.hasComponents ( translation, rotation, image ) )
+            {
+                translation = ( ComponentTranslation )   entity.getComponent ( Constants.COMPONENT_TRANSLATION );
+                rotation    = ( ComponentRotation )      entity.getComponent ( Constants.COMPONENT_ROTATION );
+                image       = ( ComponentResourceSprite ) entity.getComponent ( Constants.COMPONENT_RESOURCE_IMAGE );
+                                
+                // Start working with the entities components.
+                
+                // TODO:
+                
+                // Console logger.
+                
+                logger.log ();
+            }
+        }        
+    }
+}

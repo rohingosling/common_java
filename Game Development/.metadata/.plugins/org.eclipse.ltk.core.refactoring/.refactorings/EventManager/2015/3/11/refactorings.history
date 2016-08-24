@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 2 elements to &apos;ResourceManager/src/rohin.gameengine&apos;&#x0D;&#x0A;- Original project: &apos;EventManager&apos;&#x0D;&#x0A;- Destination element: &apos;ResourceManager/src/rohin.gameengine&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     rohin.gameengine.Resource.java&#x0D;&#x0A;     rohin.gameengine.ResourceManager.java&#x0D;&#x0A;- Update references to refactored element" description="Move compilation units" destination="=ResourceManager/src&lt;rohin.gameengine" element1="/src&lt;rohin.gameengine{Resource.java" element2="/src&lt;rohin.gameengine{ResourceManager.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1426273898364" units="2" version="1.0"/>
+</session>

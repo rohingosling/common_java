@@ -1,0 +1,21 @@
+package rohin.gameengine;
+
+public class EntityBallBlue extends ECSEntity
+{
+    // Constructor/s
+    
+    public EntityBallBlue ( ECSEngine owner )
+    {   
+        // Initialize ECS object parameters.
+        
+        this.id    = Constants.ENTITY_BALL_BLUE;    // Unique entity ID.
+        this.name  = "ENTITY_BALL_BLUE";            // Internal fileName.        
+        this.owner = owner;                         // PArent object. For in case we want to talk with the parent game engine.
+        
+        // Add components.
+        
+        this.addComponent ( Constants.COMPONENT_TRANSLATION,    new ComponentTranslation   () );
+        this.addComponent ( Constants.COMPONENT_ROTATION,       new ComponentRotation      () );
+        this.addComponent ( Constants.COMPONENT_RESOURCE_IMAGE, new ComponentResourceSprite () );
+    }
+}

@@ -1,0 +1,4 @@
+1426052146393	Rename field 'M_VIEW_WIDTH'
+1426052188753	Rename field 'M_VIEW_HEIGHT'
+1426054200268	Rename method 'GetScreen'
+1426054209971	Rename method 'GetScreenBuffer'

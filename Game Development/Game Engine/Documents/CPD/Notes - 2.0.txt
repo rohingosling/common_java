@@ -1,0 +1,157 @@
+IListener
+{
+  OnEvent()
+}
+
+//--------------------------------------------------------------------------------
+
+Event
+{
+  Name         : String
+  Source       : Object
+  Data         : Object
+  TimeStamp    : Long
+  ListenerList : List of IListener
+
+  Register ( Listener : IListener )
+  {
+    ListenerList.Add ( Listener )
+  }
+
+  Deregister ( Listener : IListener )
+  {
+    ListenerList.Delete ( Listener )
+  }
+
+  Dispatch
+  {
+    For Each Listener In ListenerList
+    {
+      Listener.OnEvent()
+    }
+  }
+}
+
+//--------------------------------------------------------------------------------
+
+EventManager
+{
+  EventQueue : Queue Of Event
+  EventCache : List  Of Event
+
+  Cache ( NewEvent : Event )
+  {
+  }
+
+  Post ( EventName : String )
+  {
+    Event = EventCache.GetItem ( EventName )
+    EventQueue.Add ( Event )
+  }
+
+  Dispatch ( EventName : String )
+  {
+    Event = EventQueue.GetItem ( EventName )
+    Event.Dispatch()
+  }
+
+  DispatchAll
+  {
+    For Each Event in EventQueue
+    {
+      Event.Dispatch()
+    }    
+  }
+}
+
+//--------------------------------------------------------------------------------
+
+Actor1
+{
+}
+
+Actor2
+{
+}
+
+Actor3
+{
+}
+
+Application
+{
+  EventHandler : EventHandler
+
+  EventA.Name = "A"
+  EventB.Name = "B"
+  EventC.Name = "C"
+
+  EventA.Register ( Actor1 )
+  EventA.Register ( Actor2 )
+  EventB.Register ( Actor2 )
+  EventC.Register ( Actor3 )
+
+  EventHandler.Cache ( EventA )
+  EventHandler.Cache ( EventB )
+  EventHandler.Cache ( EventC ) 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

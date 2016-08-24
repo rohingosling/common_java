@@ -1,0 +1,503 @@
+
+package rohin.gameengine;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
+
+import rohin.gameengine.ConsoleLogger;
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Main application program.
+// 
+// Author:  Rohin Gosling
+// Version: 1.0
+// Since:   2014-04-18
+//
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public class Application extends ECSObject
+{
+    // @formatter:off
+    
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // DATA TYPES
+    //
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    enum ApplicationState
+    {        
+        START_UP,           // Start up and initialization.
+        SHUT_DOWN,          // Shut down and clean up.
+        EXIT,               // Terminate application loop.
+        MENU_MAIN,          // Menu ECSSystem: Main menu.
+        MENU_SETTINGS,      // Menu ECSSystem: Main menu / Settings.
+        MENU_GAME_SETUP,    // Menu ECSSystem: Main menu / Game Setup.
+        GAME_LEVEL_1,       // Execute game loop. Level 1.
+        GAME_LEVEL_2,       // Execute game loop. Level 2.
+        GAME_LEVEL_3,       // Execute game loop. Level 2.
+        GAME_TEST           // Execute game loop. Test level.
+    }
+
+    
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // FIELDS
+    //
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Application properties file: Application settings.
+    
+    private String                  applicationWindowTitle;         // Display string for application window title bar.
+    private int                     versionMajor;                   // Major version number.
+    private int                     versionMinor;                   // Minor version number.
+    private int                     screenWidth;                    // Main application window width.
+    private int                     screenHeight;                   // Main application window height.
+    private int                     languageCode;                   // UI language code.
+    private String                  languageStringTablePath;        // File path where string table/s are stored.
+    private ApplicationState        applicationState;               // Used to control FA (Finite Automata) style program flow.
+    
+    // Application properties file: Game engine.
+    
+    private String                  gameEngineResourcePath;         // Disk location, where game assets are loaded from.
+    private Boolean                 gameEngineDebugOverlayVisible;  // Debugging information overlay switch.
+    private Boolean                 gameEngineLoggingEnabled;       // Game engine specific logging switch.
+    
+    // Application properties file: Game loop.
+
+    private int                     gameLoopDelayFixed;             // Game loop, frame rate regulator. Fixed delay, measured in ms.        
+    private int                     gameLoopDelayMin;               // Minimum loop iteration delay.
+    private double                  gameLoopFPSTarget;              // Target Frames Per Second.
+    private Boolean                 gameLoopFPSTargetEnabled;       // Choose whether to use a fixed loop delay, or a target FPS.
+    
+    // String table
+    
+    private String                  languageStringTableFile;        // The fully qualified file name and path of the language string table file.
+    private StringTable             stringTable;                    // String table to accommodate multi-language support.
+    
+    // Logging.
+    
+    private ConsoleLogger           logger;                         // Console logger.
+    private Boolean                 loggingEnabled;                 // Enable application logging.
+    
+    // Application resources.
+    
+    private ApplicationSettings     settings;                       // Application settings manager.
+    private GraphicsWindow          applicationWindow;              // Application window.
+    private BufferStrategy          screenBuffer;                   // Display buffer.
+    private KeyboardEventHandler    eventHandlerKeyboard;           // Keyboard event handler.
+    
+    // ECS Game engine.
+    
+    private ECSEngineMenuSystem     menuSystem;
+    private ECSEngineGameLevel1     gameLevel1;
+    private ECSEngineGameLevel2     gameLevel2;
+    private ECSEngineGameLevel3     gameLevel3;
+    private ECSEngineGameTest       gameTest;
+    
+    // ECS systems.
+    
+    private ECSSystemExampleEntityItterator systemEntityIterator;
+    
+    // ECS entities.
+    
+    private ECSEntityExampleEntity entityExample;
+        
+
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // ACCESSORS and MUTATORS
+    //
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // @formatter:on
+    
+    public ECSEngineGameTest getGameTest () { return gameTest; }
+    
+    public void setGameTest ( ECSEngineGameTest gameTest ) { this.gameTest = gameTest; }
+    
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // METHODS
+    //
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //
+    // Constructor 1
+    //
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public Application ()
+    {        
+        // Call initialization methods.
+        
+        InitializeApplicationSettings ();       // Initialize application settings.
+        InitializeStringTable ();               // Load the string table, for the appropriate language retrieved from the application settings file.
+        InitializeGraphicsWindow ();            // Initialize graphics window.       
+        InitializeGameEngine ();                // Initialize ECS game engine/s.
+        InitializeGameLoops ();                 // Initialize the game loops of all our game engines.
+        InitializeSystems ();                   // Initialize ECS systems.
+        InitializeEntities ();                  // Initialize ECS entities.
+        InitializeKeyboard ();                  // Initialize keyboard handler.
+      
+        // Console logger.
+        
+        logger.Log ( this.toString () + this.settings.toString () );
+    }
+    
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    // 
+    // InitializeApplicationSettings
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void InitializeApplicationSettings ()
+    {   
+        // Load settings from disk.
+        
+        this.settings = new ApplicationSettings ();
+        this.settings.Load ( Constants.FILE_APPLICATION_SETTINGS );
+        
+        // Load application settings.
+        
+        this.name            = this.settings.GetString  ( Constants.APPLICATION_NAME );
+        this.versionMajor    = this.settings.GetInteger ( Constants.APPLICATION_VERSION_MAJOR );
+        this.versionMinor    = this.settings.GetInteger ( Constants.APPLICATION_VERSION_MINOR );
+        this.screenWidth     = this.settings.GetInteger ( Constants.APPLICATION_SCREEN_WIDTH );
+        this.screenHeight    = this.settings.GetInteger ( Constants.APPLICATION_SCREEN_HEIGHT );
+        this.languageCode    = this.settings.GetInteger ( Constants.APPLICATION_LANGUAGE_CODE );
+        this.loggingEnabled  = this.settings.GetBoolean ( Constants.APPLICATION_LOGGING_ENABLED );
+        
+        // Load game engine settings.
+        
+        this.gameEngineResourcePath        = this.settings.GetString  ( Constants.GAME_ENGINE_RESOURCE_PATH );
+        this.gameEngineDebugOverlayVisible = this.settings.GetBoolean ( Constants.GAME_ENGINE_DEBUG_OVERLAY_VISIBLE );
+        this.gameEngineLoggingEnabled      = this.settings.GetBoolean ( Constants.GAME_ENGINE_LOGGING_ENABLED );
+        
+        // Load game loop settings.
+        
+        this.gameLoopFPSTargetEnabled =          this.settings.GetBoolean ( Constants.GAME_LOOP_FPS_TARGET_ENABLED );
+        this.gameLoopFPSTarget        = (double) this.settings.GetInteger ( Constants.GAME_LOOP_FPS_TARGET );
+        this.gameLoopDelayFixed       =          this.settings.GetInteger ( Constants.GAME_LOOP_DELAY_FIXED );
+        this.gameLoopDelayMin         =          this.settings.GetInteger ( Constants.GAME_LOOP_DELAY_MIN );
+        
+        // Initialize application.
+        
+        this.id               = 0;
+        this.text             = "Test Game";        
+        this.applicationState = ApplicationState.EXIT;
+        this.logger           = new ConsoleLogger ( this, this.loggingEnabled );
+        
+        // Compile application window title string.
+        
+        CompileApplicationWindowTitle ();
+        
+        // Console logger.
+        
+        logger.Log ();
+    }
+    
+ // ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    // InitializeStringTable
+    //
+    // Load the string table file, referenced in the application settings file
+    // through the language code property.
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void InitializeStringTable ()
+    {
+        // Create a new string table for storing and managing language dependent UI text.
+        
+        this.stringTable = new StringTable ();
+        
+        // Select the appropriate string table file, based on the language code retrieved from the application settings file.
+        
+        switch ( this.languageCode )
+        {
+            case 0: this.languageStringTableFile = Constants.FILE_STRING_TABLE_ENGLISH; break;
+            case 1: this.languageStringTableFile = Constants.FILE_STRING_TABLE_GREEK;   break;
+            case 2: this.languageStringTableFile = Constants.FILE_STRING_TABLE_KLINGON; break;
+            case 3: this.languageStringTableFile = Constants.FILE_STRING_TABLE_SNOOP;   break;
+        }
+        
+        // Load the selected string table file.
+        
+        this.stringTable.LoadStringTable ( this.languageStringTableFile );
+        
+        // Console Logger.
+
+        logger.Log ( this.stringTable.toString () ); 
+    }
+    
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    // 
+    // InitializeGraphicsWindow
+    // 
+    // Arguments:
+    //
+    // - width
+    //   Screen width.
+    //
+    // - height
+    //   Screen height.
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void InitializeGraphicsWindow ()
+    {        
+        // Initialize Graphics window.
+    
+        this.applicationWindow = new GraphicsWindow ( this.screenWidth, this.screenHeight );
+        this.applicationWindow.setTitle             ( this.applicationWindowTitle );    
+        
+        // Get the double buffered screen buffer.
+        
+        this.screenBuffer = this.applicationWindow.GetScreenBuffer ();   
+        
+        // Console Logger.
+
+        logger.Log (); 
+    }
+    
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    // 
+    // InitializeKeyboard
+    //
+    // Add and configure a keyboard event handler to the game engine.
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void InitializeKeyboard ()
+    {
+        // Create a new input device event handler.
+        // - Give the keyboard Event handler access to a command invocation interpreter, or and event manager.
+        // - Pass in a handle to the game engine, so that the keyboard handler hass access to all game assets that may be required by commands.
+        
+        this.eventHandlerKeyboard = new KeyboardEventHandler ();
+
+        this.eventHandlerKeyboard.setApplication ( this );
+        
+        // Add the keyboard handler to our application screen.
+        
+        this.applicationWindow.GetScreen ().addKeyListener ( this.eventHandlerKeyboard );
+        
+        // Give the graphics screen focus, in order to receive keyboard events.
+        
+        this.applicationWindow.GetScreen ().requestFocus ();
+        
+        // Console Logger.
+
+        logger.Log (); 
+    }
+    
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    // 
+    // InitializeGameEngine
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void InitializeGameEngine ()
+    {
+        // Initialize game engine components.
+        
+        this.menuSystem = new ECSEngineMenuSystem ();
+        this.gameLevel1 = new ECSEngineGameLevel1 ();            
+        this.gameLevel2 = new ECSEngineGameLevel2 ();  
+        this.gameLevel3 = new ECSEngineGameLevel3 ();
+        this.gameTest   = new ECSEngineGameTest   ();
+        
+        // Initialize graphics context handle, and pass to game engine objects.
+        
+        Graphics2D graphicsHandle = ( Graphics2D ) this.screenBuffer.getDrawGraphics ();
+        
+        this.menuSystem.SetGraphicsHandle ( graphicsHandle );
+        this.gameLevel1.SetGraphicsHandle ( graphicsHandle );
+        this.gameLevel2.SetGraphicsHandle ( graphicsHandle );
+        this.gameLevel3.SetGraphicsHandle ( graphicsHandle );
+        this.gameTest.SetGraphicsHandle   ( graphicsHandle );
+        
+        // Console logger.
+                  
+        logger.Log ();
+    }
+    
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    // 
+    // InitializeGameLoops
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void InitializeGameLoops ()
+    {   
+        // Initialize game engine.
+        
+        this.gameTest.SetResourcePath   ( this.gameEngineResourcePath );
+        this.gameTest.SetloggingEnabled ( this.gameEngineLoggingEnabled );
+        
+        // Initialize game loop.
+        
+        this.gameTest.setFPSTargetEnabled ( this.gameLoopFPSTargetEnabled );
+        this.gameTest.setFPSTarget        ( this.gameLoopFPSTarget );
+        this.gameTest.setLoopDelayFixed   ( this.gameLoopDelayFixed );
+        this.gameTest.setLoopDelayMin     ( this.gameLoopDelayMin );
+               
+        // Console logger.
+                  
+        logger.Log ();
+    }
+    
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    // 
+    // InitializeSystems.
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void InitializeSystems ()
+    {  
+        // Initialize ECS systems.
+        
+        this.systemEntityIterator  = new ECSSystemExampleEntityItterator ( this.gameTest );
+        
+        // Add systems to the appropriate game engine/s.
+        
+        this.gameTest.AddSystem ( this.systemEntityIterator  );        
+        
+        // Console logger.
+                  
+        logger.Log ();
+    }
+    
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    // 
+    // InitializeEntities.
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public void InitializeEntities ()
+    {
+        // Initialize ECS entities.
+        
+        this.entityExample      = new ECSEntityExampleEntity ( this.gameTest );
+        
+        // Add entities to the appropriate game engine/s.
+        
+        this.gameTest.AddEntity ( Constants.ENTITY_EXAMPLE,       this.entityExample      );
+        
+        // Console logger.
+                  
+        logger.Log ();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //
+    // Call Run() to start the application.
+    //
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    @ SuppressWarnings ( "incomplete-switch" )
+    public void Run ()
+    {
+        // Console logger.
+
+        logger.Log ();
+
+        // Begin application state management loop.
+
+        this.applicationState = ApplicationState.START_UP;
+
+        while ( this.applicationState != ApplicationState.EXIT )
+        {
+            switch ( this.applicationState )
+            {
+            case START_UP:
+                logger.Log ( "State = START_UP" );
+                this.applicationState = ApplicationState.MENU_MAIN;
+                break;
+
+            case SHUT_DOWN:
+                logger.Log (  "State = SHUT_DOWN" );
+                this.applicationState = ApplicationState.EXIT;
+                break;
+
+            case MENU_MAIN:
+                logger.Log (  "State = MENU_MAIN" );               
+                                
+                this.applicationState = ApplicationState.GAME_TEST;
+                break;
+
+            case MENU_SETTINGS:
+                logger.Log (  "State = MENU_SETTINGS" );
+                break;
+
+            case MENU_GAME_SETUP:
+                logger.Log (  "State = MENU_GAME_SETUP" );
+                break;
+
+            case GAME_LEVEL_1:
+                logger.Log (  "State = GAME_LEVEL_1" );
+                this.applicationState = ApplicationState.SHUT_DOWN;
+                break;
+            
+            case GAME_LEVEL_2:
+                logger.Log (  "State = GAME_LEVEL_2" );
+                this.applicationState = ApplicationState.SHUT_DOWN;
+                break;
+                
+            case GAME_LEVEL_3:
+                logger.Log (  "State = GAME_LEVEL_3" );
+                this.applicationState = ApplicationState.SHUT_DOWN;
+                break;
+
+            case GAME_TEST:
+                logger.Log (  "State = GAME_TEST" );
+                this.gameTest.Run ();
+                this.applicationState = ApplicationState.SHUT_DOWN;
+                break;
+            }
+        }
+
+        // Console logger.
+
+        logger.Log (  "State = EXIT" );
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    // CompileApplicationWindowTitle
+    //
+    // Compiles the string to be displayed in th title bar of the application
+    // window.
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    private void CompileApplicationWindowTitle ()
+    {
+        String S_EMPTY                     = "";
+        String S_SPACE                     = " ";        
+        String S_VERSION                   = "Version ";
+        String S_VERSION_PARENTHESES_OPEN  = "(";
+        String S_VERSION_PARENTHESES_CLOSE = ")";
+        String S_VERSION_DECIMAL_MARK      = ".";
+        
+        // Compile application title string.
+
+        this.applicationWindowTitle =  S_EMPTY;
+        this.applicationWindowTitle += this.name;
+        this.applicationWindowTitle += S_SPACE;
+        this.applicationWindowTitle += S_VERSION_PARENTHESES_OPEN;
+        this.applicationWindowTitle += S_VERSION;
+        this.applicationWindowTitle += Integer.toString ( this.versionMajor );
+        this.applicationWindowTitle += S_VERSION_DECIMAL_MARK;
+        this.applicationWindowTitle += Integer.toString ( this.versionMinor );
+        this.applicationWindowTitle += S_VERSION_PARENTHESES_CLOSE;        
+    }
+    
+    // @formatter:on
+
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // OVERRIDEBLE METHODS
+    //
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}

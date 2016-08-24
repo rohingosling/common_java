@@ -1,0 +1,6 @@
+package rohin.gameengine;
+
+public class ComponentResourceImage extends ECSComponent
+{
+
+}

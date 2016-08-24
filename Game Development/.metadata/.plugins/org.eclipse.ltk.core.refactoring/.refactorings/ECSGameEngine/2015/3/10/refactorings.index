@@ -1,0 +1,11 @@
+1425240783602	Rename method 'GetComponents'
+1425324444284	Rename field 'fixedGameLoopDelayEnabled'
+1425325164515	Rename field 'fixedLoopDelayEnabled'
+1425325656399	Rename field 'fixedLoopDelay'
+1425325671889	Rename field 'dynamicLoopDelay'
+1425325701412	Rename method 'getFixedLoopDelay'
+1425325721461	Rename method 'setFixedLoopDelay'
+1425325734130	Rename local variable 'fixedLoopDelay'
+1425326446643	Rename field 'loopDelaydynamic'
+1425326992349	Rename field 'loopDelayDynamic'
+1425331789168	Delete element
