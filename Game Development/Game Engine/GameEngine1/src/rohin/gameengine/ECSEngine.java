@@ -144,7 +144,7 @@ public abstract class ECSEngine extends ECSObject
                 system.update ( t );                            // Call Update on each of them. 
             }
             
-            regulateFrameRate ();                               // Give the CPU some time to do other things other than spin the loop.
+            regulateFrameRate ();                               // Give the CPU some time to do other things other than spin this loop.
 
             stop = System.currentTimeMillis ();                 // Stop the clock.
             t    = stop - start;                                // Calculate the lap time for this iteration.
