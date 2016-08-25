@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Game Development/Game Engine/GameEngine1/src"/>
+	<classpathentry kind="src" path="Game Development/Game Engine/TestEngine/src"/>
+	<classpathentry kind="src" path="Game Development/Implementation/ECSGameImplementation1/src"/>
+	<classpathentry kind="src" path="Game Development/Implementation/GameImplementation1/src"/>
+	<classpathentry kind="src" path="Game Development/Implementation/TestImplementation/src"/>
+	<classpathentry kind="src" path="Game Development/Platform/AWTJavaPlatform/src"/>
+	<classpathentry kind="src" path="Game Development/Utility/CommandManager/src"/>
+	<classpathentry kind="src" path="Game Development/Utility/EventManager/src"/>
+	<classpathentry kind="src" path="Game Development/Utility/ResourceManager/src"/>
+	<classpathentry kind="src" path="Game Development/Utility/UtilityClassLibrary/src"/>
+	<classpathentry kind="src" path="machine_learning/application/MLJavaApplication1/src"/>
+	<classpathentry kind="src" path="machine_learning/backup"/>
+	<classpathentry kind="src" path="machine_learning/java/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="machine_learning/java/bin"/>
+</classpath>

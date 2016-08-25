@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<KEY_MAP_TABLE>
+
+    <!--
+        A complete list of virtual key codes may be found at the following two locations.
+        
+        https://msdn.microsoft.com/en-us/library/ms927178.aspx
+        http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
+        http://www.kbdedit.com/manual/low_level_vk_list.html
+    -->
+
+	<KEY_MAP keyEvent="VK_UP"     command="COMMAND_PLAYER_MOVE_UP"    actor="ACTOR_PLAYER_AVATAR" />
+	<KEY_MAP keyEvent="VK_DOWN"   command="COMMAND_PLAYER_MOVE_DOWM"  actor="ACTOR_PLAYER_AVATAR" />
+	<KEY_MAP keyEvent="VK_LEFT"   command="COMMAND_PLAYER_MOVE_LEFT"  actor="ACTOR_PLAYER_AVATAR" />
+	<KEY_MAP keyEvent="VK_RIGHT"  command="COMMAND_PLAYER_MOVE_RIGHT" actor="ACTOR_PLAYER_AVATAR" />
+    <KEY_MAP keyEvent="VK_SPACE"  command="COMMAND_PLAYER_JUMP"       actor="ACTOR_PLAYER_AVATAR" />
+    <KEY_MAP keyEvent="VK_PAUSE"  command="COMMAND_GAME_PAUSE"        actor="ACTOR_GAME_LOOP_CONTROLER" />
+    <KEY_MAP keyEvent="VK_ESCAPE" command="COMMAND_GAME_EXIT"         actor="ACTOR_GAME_LOOP_CONTROLER" />
+        
+</KEY_MAP_TABLE>

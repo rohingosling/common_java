@@ -1,7 +1,0 @@
-1431989156745	Rename method 'printRowHeader'
-1431991090255	Rename local variable 'stringWeights'
-1431991679778	Rename method 'printWeights'
-1431992075337	Rename local variable 'outputVector'
-1431992471423	Rename local variable 'inputVector'
-1431995272853	Rename method 'computeOutputVector'
-1432401999404	Rename local variable 'network'

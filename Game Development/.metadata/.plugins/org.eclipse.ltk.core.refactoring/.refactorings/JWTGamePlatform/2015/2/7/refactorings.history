@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move element &apos;ConsoleLogger.java&apos; to &apos;ConsoleLogger/src/rohin.gameengine&apos;&#x0D;&#x0A;- Original project: &apos;JWTGamePlatform&apos;&#x0D;&#x0A;- Destination element: &apos;ConsoleLogger/src/rohin.gameengine&apos;&#x0D;&#x0A;- Original element: &apos;rohin.gameengine.ConsoleLogger.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=ConsoleLogger/src&lt;rohin.gameengine" element1="/src&lt;rohin.gameengine{ConsoleLogger.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1423773011369" units="1" version="1.0"/>
-</session>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;rohin.gameengine.EventHandlerKeyboard&apos; to &apos;KeyboardEventHandler&apos;&#x0D;&#x0A;- Original project: &apos;AWTJavaPlatform&apos;&#x0D;&#x0A;- Original element: &apos;rohin.gameengine.EventHandlerKeyboard&apos;&#x0D;&#x0A;- Renamed element: &apos;rohin.gameengine.KeyboardEventHandler&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;EventHandlerKeyboard&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;rohin.gameengine{EventHandlerKeyboard.java[EventHandlerKeyboard" matchStrategy="1" name="KeyboardEventHandler" qualified="false" references="true" similarDeclarations="false" stamp="1423850051804" textual="true" version="1.0"/>
-</session>

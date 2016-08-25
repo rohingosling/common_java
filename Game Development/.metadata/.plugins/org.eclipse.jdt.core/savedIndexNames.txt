@@ -1,6 +1,0 @@
-INDEX VERSION 1.126+R:\Projects\Game Development\.metadata\.plugins\org.eclipse.jdt.core
-164417066.index
-2559761113.index
-1657330681.index
-3870636077.index
-11412313.index

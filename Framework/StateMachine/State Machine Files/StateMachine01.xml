@@ -1,0 +1,95 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<StateMachine>
+	<Name>StateMachine01</Name>
+	<Text>State Machine - 01</Text>
+	<StartState>A</StartState>
+
+	<States>
+		<State>
+			<Name>A</Name>
+			<Text>A</Text>
+			<EndState>0</EndState>
+		</State>
+		<State>
+			<Name>B</Name>
+			<Text>B</Text>
+			<EndState>0</EndState>
+		</State>
+		<State>
+			<Name>C</Name>
+			<Text>C</Text>
+			<EndState>0</EndState>
+		</State>
+		<State>
+			<Name>D</Name>
+			<Text>D</Text>
+			<EndState>0</EndState>
+		</State>
+	</States>
+	
+	<Conditions>
+		<Condition>
+			<Name>x</Name>
+			<Text>x</Text>
+		</Condition>
+		<Condition>
+			<Name>y</Name>
+			<Text>y</Text>
+		</Condition>
+		<Condition>
+			<Name>z</Name>
+			<Text>z</Text>
+		</Condition>
+	</Conditions>
+	
+	<Transitions>
+		<Transition>
+			<InitialState>A</InitialState>
+			<Condition>x</Condition>
+			<GoalState>B</GoalState>
+		</Transition>
+		<Transition>
+			<InitialState>A</InitialState>
+			<Condition>y</Condition>
+			<GoalState>D</GoalState>
+		</Transition>
+		<Transition>
+			<InitialState>A</InitialState>
+			<Condition>z</Condition>
+			<GoalState>C</GoalState>
+		</Transition>
+		<Transition>
+			<InitialState>B</InitialState>
+			<Condition>x</Condition>
+			<GoalState>C</GoalState>
+		</Transition>
+		<Transition>
+			<InitialState>B</InitialState>
+			<Condition>y</Condition>
+			<GoalState>A</GoalState>
+		</Transition>
+		<Transition>
+			<InitialState>C</InitialState>
+			<Condition>x</Condition>
+			<GoalState>D</GoalState>
+		</Transition>
+		<Transition>
+			<InitialState>C</InitialState>
+			<Condition>y</Condition>
+			<GoalState>B</GoalState>
+		</Transition>
+		<Transition>
+			<InitialState>D</InitialState>
+			<Condition>x</Condition>
+			<GoalState>A</GoalState>
+		</Transition>
+		<Transition>
+			<InitialState>D</InitialState>
+			<Condition>y</Condition>
+			<GoalState>C</GoalState>
+		</Transition>
+	</Transitions>
+
+</StateMachine>
