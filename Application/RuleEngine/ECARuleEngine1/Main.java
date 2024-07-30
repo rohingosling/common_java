@@ -1,14 +1,29 @@
 import java.io.IOException;
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+/**
+ * The Main class is the entry point for the application.
+ * - It initializes the rule engine, loads rules from a CSV file, and executes a set of predefined test cases.
+ */
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 public class Main 
 {
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     * The main method initializes the rule engine, loads the rule file, and executes predefined test cases.
+     *
+     * @param args Command-line arguments (not used)
+     */
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------
+
     public static void main ( String [] args ) 
     {
         try 
         {
             // Initialize local Constants.            
 
-            final String FILE_NAME_RULES     = "test_rules_01.csv";            
+            final String FILE_NAME_RULES     = "test_rules_01.csv";
             final String RULE_NAME_UNDEFINED = "UNDEFINED_RULE";
             final String CONDITION_ANY_VALUE = "X";
 
@@ -26,6 +41,7 @@ public class Main
                 { "RULE_REGIONAL",     "CAPE_TOWN",         "NEW",               "STANDARD"          },
                 { "RULE_REGIONAL",     CONDITION_ANY_VALUE, "NEW",               "STANDARD"          },
                 { RULE_NAME_UNDEFINED, "CAPE_TOWN",         "NEW",               "STANDARD"          },
+                { "RULE_DEFAULT",      "KZN",               "RENEWAL",           "BRANCH"            },
             };
             
             // Initialize rule engine and load rule file. 
@@ -43,6 +59,15 @@ public class Main
             System.err.println ( "Failed to load rules: " + e.getMessage () );
         }
     }
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     * Executes the given test cases using the specified rule engine.
+     *
+     * @param testCases 2D array of test cases, where each test case is an array of strings representing the event (rule name) and its conditions.
+     * @param ruleEngine The rule engine to be used for querying rules
+     */
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
     static public void executeTestCases ( String [] [] testCases, ECARuleEngine ruleEngine )
     {
